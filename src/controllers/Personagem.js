@@ -22,6 +22,7 @@ class PersonagemController {
       const personagens = await trx('personagem').whereExists(function () {
         this.select('*').from('personagem');
       });
+      console.log(personagens);
       await trx.commit();
 
       return res.status(200).send({

@@ -6,6 +6,7 @@ exports.up = function (knex) {
       table.integer('age').notNullable();
       table.string('condition', 50).notNullable();
       table.string('nationality', 200).notNullable();
+      table.string('image', 300).notNullable();
       table.string('genre', 25).notNullable();
     });
 };
