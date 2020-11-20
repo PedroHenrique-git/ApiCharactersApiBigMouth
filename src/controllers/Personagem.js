@@ -3,12 +3,8 @@ import db from '../database/connection';
 const valida = (name, age, condition, nationality, genre) => {
   const erros = [];
 
-  if (name === '' || condition === '' || nationality === '' || genre === '') {
+  if (name === '' || condition === '' || nationality === '' || genre === '' || age === '') {
     erros.push('Nenhum dos campos pode ser vazio');
-  }
-
-  if (typeof age !== 'number') {
-    erros.push('Idade tem que ser um número');
   }
 
   return erros;
