@@ -53,7 +53,7 @@ class PersonagemController {
 
   async create(req, res) {
     const {
-      name, age, condition, occupation, image, genre,
+      name, age, condition, occupation, image, genre, information,
     } = req.body;
 
     const trx = await db.transaction();
@@ -66,6 +66,7 @@ class PersonagemController {
         occupation,
         image,
         genre,
+        information,
       });
 
       await trx.commit();
@@ -103,7 +104,7 @@ class PersonagemController {
     const { id } = req.params;
 
     const {
-      name, age, condition, occupation, image, genre,
+      name, age, condition, occupation, image, genre, information,
     } = req.body;
 
     const trx = await db.transaction();
@@ -116,7 +117,7 @@ class PersonagemController {
       }
 
       await trx('personagem').where('id', id).update({
-        name, age, condition, occupation, image, genre,
+        name, age, condition, occupation, image, genre, information,
       });
       await trx.commit();
       return res.status(200).json({ message: 'Personagem atualizado com sucesso' });
