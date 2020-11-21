@@ -1,8 +1,5 @@
 const path = require('path');
 const dotenv = require('dotenv');
-const { attachPaginate } = require('knex-paginate');
-
-attachPaginate();
 
 dotenv.config();
 
