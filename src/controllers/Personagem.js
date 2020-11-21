@@ -15,13 +15,30 @@ class PersonagemController {
   async index(req, res) {
     const trx = await db.transaction();
     try {
-      const personagens = await trx('personagem').whereExists(function () {
-        this.select('*').from('personagem');
-      });
+      const results = {};
+      const [count] = await trx('personagem').count();
+      const limite = 5;
+
+      let { page = 1 } = req.query;
+      if (page < 1) page = 1;
+
+      const personagens = await trx('personagem').select('*')
+        .limit(limite).offset((page - 1) * limite);
+
+      results.next = `http://localhost:3000/personagem?page=${Number(page) + 1}`;
+
+      if (Number(page) === Math.ceil((count['count(*)']) / limite)) {
+        results.next = null;
+      }
+
+      if (page > 1) {
+        results.prev = `http://localhost:3000/personagem?page=${Number(page) - 1}`;
+      }
+
       await trx.commit();
 
       return res.status(200).send({
-        personagens,
+        info: results, personagens,
       });
     } catch (e) {
       await trx.rollback();
