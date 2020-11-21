@@ -45,6 +45,8 @@
   <p>Atualizar personagem: </p>
   <img src="/public/screenshots/atualizando.png">
 </div>
+<br/>
+<b>obs: A api ainda não contém todos os personagens, pois são muitos</b>
 
 
 
