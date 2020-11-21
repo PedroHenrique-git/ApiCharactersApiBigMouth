@@ -4,15 +4,17 @@ class PersonagemController {
   // eslint-disable-next-line class-methods-use-this
   async index(req, res) {
     const trx = await db.transaction();
-    const { name } = req.query;
 
     try {
-      const results = {};
       let characters = null;
-      const [count] = await trx('personagem').count();
+      const results = {};
       const limite = 5;
+      const [count] = await trx('personagem').count();
+      const totalPages = Math.ceil((count['count(*)']) / limite);
 
       let { page = 1 } = req.query;
+      const { name } = req.query;
+
       if (page < 1) page = 1;
 
       if (name !== undefined) {
@@ -20,13 +22,15 @@ class PersonagemController {
           .select('*')
           .where('name', 'like', `%${name}%`);
       } else {
-        characters = await trx('personagem').select('*')
-          .limit(limite).offset((page - 1) * limite);
+        characters = await trx('personagem')
+          .select('*')
+          .limit(limite)
+          .offset((page - 1) * limite);
       }
 
       results.next = `http://localhost:3000/personagem?page=${Number(page) + 1}`;
 
-      if (Number(page) === Math.ceil((count['count(*)']) / limite)) {
+      if (Number(page) === totalPages) {
         results.next = null;
       }
 
@@ -34,9 +38,11 @@ class PersonagemController {
         results.prev = `http://localhost:3000/personagem?page=${Number(page) - 1}`;
       }
 
-      await trx.commit();
+      results.totalItems = count['count(*)'];
+      results.totalPages = totalPages;
 
-      return res.status(200).send({
+      await trx.commit();
+      return res.status(200).json({
         info: results, characters,
       });
     } catch (e) {
@@ -126,6 +132,11 @@ class PersonagemController {
 
     try {
       const personagem = await trx('personagem').select('*').where('id', id);
+
+      if (!personagem[0]) {
+        return res.status(400).json({ error: 'Envie um id valido' });
+      }
+
       return res.status(200).json({ personagem });
     } catch (e) {
       await trx.rollback();
