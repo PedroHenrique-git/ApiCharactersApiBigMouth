@@ -8,12 +8,11 @@ class PersonagemController {
     try {
       let characters = null;
       const results = {};
-      const limite = 5;
       const [count] = await trx('personagem').count();
-      const totalPages = Math.ceil((count['count(*)']) / limite);
+      const { name, limite = 5 } = req.query;
+      const totalPages = Math.ceil((count['count(*)']) / Number(limite));
 
       let { page = 1 } = req.query;
-      const { name } = req.query;
 
       if (page < 1) page = 1;
 
@@ -24,8 +23,8 @@ class PersonagemController {
       } else {
         characters = await trx('personagem')
           .select('*')
-          .limit(limite)
-          .offset((page - 1) * limite);
+          .limit(Number(limite))
+          .offset((page - 1) * Number(limite));
       }
 
       results.next = `http://localhost:3000/personagem?page=${Number(page) + 1}`;
@@ -40,6 +39,7 @@ class PersonagemController {
 
       results.totalItems = count['count(*)'];
       results.totalPages = totalPages;
+      results.limit = Number(limite);
 
       await trx.commit();
       return res.status(200).json({
