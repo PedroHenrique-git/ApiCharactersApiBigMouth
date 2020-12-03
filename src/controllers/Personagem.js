@@ -1,4 +1,7 @@
+import dotenv from 'dotenv';
 import db from '../database/connection';
+
+dotenv.config();
 
 class PersonagemController {
   // eslint-disable-next-line class-methods-use-this
@@ -27,14 +30,14 @@ class PersonagemController {
           .offset((page - 1) * Number(limite));
       }
 
-      results.next = `http://localhost:3000/personagem?page=${Number(page) + 1}`;
+      results.next = `http://localhost:${process.env.PORT}/personagem?page=${Number(page) + 1}`;
 
       if (Number(page) === totalPages) {
         results.next = null;
       }
 
       if (page > 1) {
-        results.prev = `http://localhost:3000/personagem?page=${Number(page) - 1}`;
+        results.prev = `http://localhost:${process.env.PORT}/personagem?page=${Number(page) - 1}`;
       }
 
       results.totalItems = count['count(*)'];
