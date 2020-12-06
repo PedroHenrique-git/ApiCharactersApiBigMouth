@@ -141,6 +141,7 @@ class PersonagemController {
         return res.status(400).json({ error: 'Envie um id valido' });
       }
 
+      trx.commit();
       return res.status(200).json({ personagem });
     } catch (e) {
       await trx.rollback();
