@@ -1,7 +1,7 @@
 <h1>Api rest big mouth</h1>
 
-<p>Api que retorna os dados dos personagens da série animada Big Mounth</p>
-<p><b>Tecnologias usadas: </b></p>
+<p>Api that returns the data of the characters of the animated series Big Mounth</p>
+<p><b>Technologies used: </b></p>
 
 <p>NodeJs</p>
 <p>Knex</p>
@@ -9,45 +9,47 @@
 <p>eslint</p>
 <p>express</p>
 
-<h3><b>Funcionalidades da api: </b></h3>
-<p>Paginação</p>
-<p>Possibilidade de colocar limite de dados</p>
-<p>Busca por nome ou id</p>
-<p>Crud - Create, Read, Update e Delete para controle dos personagens</p>
+<h3><b>Api features: </b></h3>
+<p>Pagination</p>
+<p>Possibility to place data limit</p>
+<p>Search by name or id</p>
+<p>Crud - Create, Read, Update and Delete for character control</p>
 
-<h3><b>Rotas da api: </b></h3>
+<h3><b>Api routes: </b></h3>
 
 <div>
-  <p>listar personagens: </p>
+  <p>list characters: </p>
   <img src="/public/screenshots/listar_todos.png">
 </div>
 <div>
-  <p>busca por id: </p>
+  <p>search by id: </p>
   <img src="/public/screenshots/busca_id.png">
 </div>
 <div>
-  <p>busca por nome: </p>
+  <p>search by name: </p>
   <img src="/public/screenshots/busca_nome.png">
 </div>
 <div>
-  <p>busca definindo página e limite: </p>
+  <p>search defining page and boundary: </p>
   <img src="/public/screenshots/busca_page_limite.png">
 </div>
 <div>
-  <p>Criar personagem: </p>
+  <p>Create character: </p>
   <img src="/public/screenshots/create.png">
 </div>
 <div>
-  <p>Excluir personagem: </p>
+  <p>Delete character: </p>
   <img src="/public/screenshots/excluir.png">
 </div>
 <div>
-  <p>Atualizar personagem: </p>
+  <p>Update character: </p>
   <img src="/public/screenshots/atualizando.png">
 </div>
 <br/>
-<b>obs: A api ainda não contém todos os personagens, pois são muitos</b>
+<b>note: The api does not yet contain all the characters, as there are many</b>
 
+## License
 
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 
